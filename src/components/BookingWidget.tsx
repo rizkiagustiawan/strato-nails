@@ -63,11 +63,13 @@ export function BookingWidget() {
           setIsSuccess(true);
         }
       } catch (error) {
-        if (error instanceof Error && error.message.includes('Time slot is already booked')) {
-          toast.error(error.message);
-          setIsSubmitting(false);
-          setCurrentStep(1); // Go back to step 1 to pick a new date/time
-          return;
+        if (error instanceof Error) {
+          if (error.message.includes('Time slot is already booked') || error.message.includes('time between 09:00 and 20:00')) {
+            toast.error(error.message);
+            setIsSubmitting(false);
+            setCurrentStep(1); // Go back to step 1 to pick a new date/time
+            return;
+          }
         }
         
         // Fallback to local storage if API fails for other reasons

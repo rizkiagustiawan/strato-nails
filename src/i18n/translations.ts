@@ -3,6 +3,11 @@ export const translations = {
     // Header
     appTitle: 'Strato Nails',
     appDesc: 'Professional Nail Art & Booking',
+    
+    // Hero
+    heroTitle: 'Elevate Your Nail Art Experience',
+    heroSubtitle: 'Professional nail care, extensions, and custom art designed exclusively for you.',
+    heroCta: 'Book Your Appointment',
 
     // Step indicators
     step1: 'Essentials',
@@ -97,6 +102,7 @@ export const translations = {
     validationContactRequired: 'Contact info is required',
     validationDateRequired: 'Date is required',
     validationTimeRequired: 'Time is required',
+    validationTimeRange: 'Please select a time between 09:00 and 20:00',
     validationBudgetRequired: 'Budget is required',
     validationTreatmentRequired: 'Please select a treatment',
     validationPaymentRequired: 'Please select a payment method',
@@ -121,6 +127,11 @@ export const translations = {
     // Header
     appTitle: 'Strato Nails',
     appDesc: 'Seni Kuku Profesional & Pemesanan',
+
+    // Hero
+    heroTitle: 'Tingkatkan Pengalaman Nail Art-mu',
+    heroSubtitle: 'Perawatan kuku profesional, ekstensi, dan desain khusus hanya untukmu.',
+    heroCta: 'Pesan Jadwal Sekarang',
 
     // Step indicators
     step1: 'Dasar',
@@ -215,6 +226,7 @@ export const translations = {
     validationContactRequired: 'Info kontak wajib diisi',
     validationDateRequired: 'Tanggal wajib diisi',
     validationTimeRequired: 'Waktu wajib diisi',
+    validationTimeRange: 'Silakan pilih waktu antara 09:00 - 20:00',
     validationBudgetRequired: 'Budget wajib dipilih',
     validationTreatmentRequired: 'Silakan pilih perawatan',
     validationPaymentRequired: 'Silakan pilih metode pembayaran',

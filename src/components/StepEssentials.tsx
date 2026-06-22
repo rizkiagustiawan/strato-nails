@@ -11,7 +11,14 @@ export function StepEssentials({ formData, updateData, onNext }: StepProps) {
     name: z.string().min(1, t('validationNameRequired')),
     contact: z.string().min(1, t('validationContactRequired')),
     date: z.string().min(1, t('validationDateRequired')),
-    time: z.string().min(1, t('validationTimeRequired')),
+    time: z.string().min(1, t('validationTimeRequired')).refine(
+      (val) => {
+        if (!val) return false;
+        const hour = parseInt(val.split(':')[0], 10);
+        return hour >= 9 && hour < 20;
+      },
+      { message: t('validationTimeRange') }
+    ),
   });
 
   type Step1Data = z.infer<typeof step1Schema>;
@@ -109,11 +116,16 @@ export function StepEssentials({ formData, updateData, onNext }: StepProps) {
           <input
             id="time"
             type="time"
+            min="09:00"
+            max="20:00"
             className={`form-input ${errors.time ? 'input-error' : ''}`}
             aria-invalid={errors.time ? 'true' : 'false'}
-            aria-describedby={errors.time ? 'time-error' : undefined}
+            aria-describedby={errors.time ? 'time-error' : 'time-hint'}
             {...register('time')}
           />
+          <p id="time-hint" style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '0.25rem' }}>
+            {t('language') === 'id' ? 'Jam Operasional: 09:00 - 20:00' : 'Business Hours: 09:00 - 20:00'}
+          </p>
           {errors.time && (
             <p id="time-error" className="error-text" role="alert">
               {errors.time.message}

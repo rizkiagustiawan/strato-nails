@@ -66,6 +66,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           });
         }
 
+        // BUSINESS HOURS VALIDATION (09:00 - 20:00)
+        const hour = parseInt(time.split(':')[0], 10);
+        if (hour < 9 || hour >= 20) {
+          return res.status(400).json({
+            success: false,
+            error: 'Please select a time between 09:00 and 20:00',
+          });
+        }
+
         // AVAILABILITY CHECK: Prevent double booking
         // Check if there's any active booking at the same date & time (excluding cancelled ones)
         const existingBooking = await sql(
