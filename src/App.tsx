@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CalendarHeart, Image as ImageIcon, ShieldCheck } from 'lucide-react';
 import { BookingWidget } from './components/BookingWidget';
 import { Gallery } from './components/Gallery';
-import { Hero } from './components/Hero';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { ThemeToggle } from './components/ThemeToggle';
 import { LanguageSwitch } from './components/LanguageSwitch';
@@ -19,25 +18,14 @@ function BookingPage() {
   const [activeTab, setActiveTab] = useState<'booking' | 'gallery'>('booking');
   const { t } = useLanguage();
 
-  const handleBookClick = () => {
-    setActiveTab('booking');
-    const bookingSection = document.getElementById('booking-section');
-    if (bookingSection) {
-      bookingSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <div className="app-container" id="main-content" role="main">
-      <div className="header-controls" style={{ position: 'absolute', top: '1rem', right: '1rem', zIndex: 100 }}>
+      <div className="header-controls">
         <LanguageSwitch />
         <ThemeToggle />
       </div>
 
-      <Hero onBookClick={handleBookClick} />
-
-      <div id="booking-section">
-        <div className="main-tabs">
+      <div className="main-tabs">
         <button
           className={`main-tab-btn ${activeTab === 'booking' ? 'active' : ''}`}
           onClick={() => setActiveTab('booking')}
@@ -79,7 +67,6 @@ function BookingPage() {
           )}
         </AnimatePresence>
       </ErrorBoundary>
-      </div>
 
       <PWAInstallPrompt />
       <div style={{ textAlign: 'center', marginTop: '1.5rem', marginBottom: '2rem' }}>

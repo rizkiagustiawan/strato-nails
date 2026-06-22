@@ -80,11 +80,11 @@ export function StepStyle({ formData, updateData, onNext, onPrev }: StepProps) {
         });
         onNext(); // Auto-advance to next step
       } else {
-        toast.error(t('aiFailed'));
+        toast.error(`Error AI: ${response.error || t('aiFailed')}`);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      toast.error(t('aiFailed'));
+      toast.error(`Error AI: ${error.message || t('aiFailed')}`);
     } finally {
       setIsAnalyzing(false);
     }

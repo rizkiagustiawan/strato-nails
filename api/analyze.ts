@@ -95,11 +95,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-  } catch (error) {
-    console.error('AI Analysis Error:', error);
+  } catch (error: any) {
+    console.error('AI Analysis Error Details:', error);
     return res.status(500).json({ 
       success: false, 
-      error: 'Failed to analyze image with AI' 
+      error: error.message || 'Failed to analyze image with AI' 
     });
   }
 }
