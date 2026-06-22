@@ -120,6 +120,14 @@ class ApiService {
     });
   }
 
+  // AI Analysis
+  async analyzeImage(base64Image: string): Promise<ApiResponse<{ category: string }>> {
+    return this.fetch('/analyze', {
+      method: 'POST',
+      body: JSON.stringify({ image: base64Image }),
+    });
+  }
+
   // Stats
   async getStats(): Promise<ApiResponse<{
     stats: BookingStats;

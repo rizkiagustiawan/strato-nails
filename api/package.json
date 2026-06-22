@@ -2,6 +2,7 @@
   "name": "strato-nails-api",
   "private": true,
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@neondatabase/serverless": "^0.9.0",
     "@vercel/node": "^3.0.0",
     "jose": "^6.2.3"

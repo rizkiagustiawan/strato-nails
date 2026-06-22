@@ -3,15 +3,17 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'sonner';
-import { Camera, X, RefreshCw } from 'lucide-react';
+import { Camera, X, RefreshCw, Sparkles } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { fileToBase64, compressImage, validateImage } from '../utils/image';
+import { api } from '../services/api';
 import type { StepProps } from '../types';
 
 export function StepStyle({ formData, updateData, onNext, onPrev }: StepProps) {
   const { t } = useLanguage();
   const [imagePreview, setImagePreview] = useState<string | null>(formData.photoUrl);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const step2Schema = z.object({
     photoUrl: z.string().nullable().optional(),
@@ -64,6 +66,30 @@ export function StepStyle({ formData, updateData, onNext, onPrev }: StepProps) {
     updateData({ photoUrl: null });
   };
 
+  const handleAIAnalysis = async () => {
+    if (!imagePreview) return;
+    
+    setIsAnalyzing(true);
+    try {
+      const response = await api.analyzeImage(imagePreview);
+      if (response.success && response.data) {
+        const detectedTreatment = response.data.category;
+        updateData({ treatment: detectedTreatment });
+        toast.success(t('aiDetected', { treatment: detectedTreatment }), {
+          icon: '✨',
+        });
+        onNext(); // Auto-advance to next step
+      } else {
+        toast.error(t('aiFailed'));
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(t('aiFailed'));
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
   const onSubmit = (data: Step2Data) => {
     updateData(data);
     onNext();
@@ -98,13 +124,32 @@ export function StepStyle({ formData, updateData, onNext, onPrev }: StepProps) {
                   type="button"
                   className="btn-remove-image"
                   onClick={handleRemoveImage}
+                  disabled={isAnalyzing}
                 >
                   <X size={14} style={{ marginRight: '4px', verticalAlign: 'text-bottom' }} /> Remove
                 </button>
-                <label htmlFor="photo" className="btn-change-image">
+                <label htmlFor="photo" className="btn-change-image" style={{ cursor: isAnalyzing ? 'not-allowed' : 'pointer', opacity: isAnalyzing ? 0.7 : 1 }}>
                   <RefreshCw size={14} style={{ marginRight: '4px', verticalAlign: 'text-bottom' }} /> Change
                 </label>
               </div>
+              
+              <button
+                type="button"
+                className="btn-ai-analyze"
+                onClick={handleAIAnalysis}
+                disabled={isAnalyzing}
+              >
+                {isAnalyzing ? (
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                    <span className="loading-spinner-small" style={{ borderColor: 'white', borderTopColor: 'transparent' }} />
+                    {t('aiAnalyzing')}
+                  </span>
+                ) : (
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                    <Sparkles size={18} /> {t('aiDetectBtn')}
+                  </span>
+                )}
+              </button>
             </div>
           ) : (
             <label className="upload-area" htmlFor="photo">

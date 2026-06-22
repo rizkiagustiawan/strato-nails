@@ -46,6 +46,10 @@ export const translations = {
     budget300plus: '300k+ IDR',
     budgetNotSure: 'Not sure yet',
     goBack: 'Go Back',
+    aiDetectBtn: 'Auto-Detect Treatment with AI',
+    aiAnalyzing: 'AI is analyzing your style...',
+    aiDetected: 'AI detected: {treatment}!',
+    aiFailed: 'Failed to analyze image. Please select manually.',
 
     // Step 3: Treatment
     treatmentTitle: 'Choose Your Treatment',
@@ -170,6 +174,10 @@ export const translations = {
     budget300plus: '300rb+',
     budgetNotSure: 'Belum yakin',
     goBack: 'Kembali',
+    aiDetectBtn: 'Tebak Perawatan dengan AI',
+    aiAnalyzing: 'AI sedang menganalisis gayamu...',
+    aiDetected: 'AI mendeteksi: {treatment}!',
+    aiFailed: 'Gagal menganalisis gambar. Silakan pilih manual.',
 
     // Step 3: Treatment
     treatmentTitle: 'Pilih Perawatan',

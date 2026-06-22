@@ -411,6 +411,28 @@ h1, h2, .widget-title, .success-title, .not-found-title {
   border-color: var(--primary-color);
 }
 
+.btn-ai-analyze {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  background: linear-gradient(135deg, #9c27b0, #673ab7);
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0 0 10px 10px;
+}
+
+.btn-ai-analyze:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7b1fa2, #512da8);
+}
+
+.btn-ai-analyze:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 [data-theme="dark"] .btn-remove-image:hover {
   background: rgba(239, 68, 68, 0.2);
 }
