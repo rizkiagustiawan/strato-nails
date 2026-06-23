@@ -36,16 +36,16 @@ export function BookingTable({ bookings, loading, onStatusChange, onDelete }: Bo
       year: 'numeric'
     });
 
-    let msg = `Halo Kak ${booking.name}! 👋\nIni dari *Strato Nails*.\n\n`;
+    let msg = `Halo Kak ${booking.name},\nIni pesan dari Strato Nails.\n\n`;
 
     if (booking.status === 'confirmed') {
-      msg += `Kabar gembira! Jadwal booking Kakak sudah kami *KONFIRMASI* 🎉\n\n📌 *Detail Jadwal:*\n- Tanggal: ${dateStr}\n- Jam: ${booking.time}\n- Treatment: ${booking.treatment}\n\nMohon hadir tepat waktu ya Kak. Jika ada kendala atau ingin mengubah jadwal, silakan balas pesan ini.\n\nSampai jumpa! ✨`;
+      msg += `Jadwal booking Kakak telah kami *KONFIRMASI*.\n\n*Detail Jadwal:*\n- Tanggal: ${dateStr}\n- Jam: ${booking.time}\n- Treatment: ${booking.treatment}\n\nMohon berkenan untuk hadir tepat waktu sesuai jadwal yang telah ditentukan. Jika ada kendala atau membutuhkan perubahan jadwal, silakan membalas pesan ini.\n\nTerima kasih dan sampai jumpa.`;
     } else if (booking.status === 'completed') {
-      msg += `Terima kasih banyak sudah mempercayakan cantiknya kuku Kakak di Strato Nails! 💖\n\nSemoga Kakak suka dengan hasilnya (${booking.treatment}). Jangan lupa tag kami di Instagram ya Kak! Ditunggu kedatangannya kembali. 🥰`;
+      msg += `Terima kasih banyak telah mempercayakan perawatan kuku Kakak di Strato Nails.\n\nKami berharap Kakak puas dengan hasil treatment kami (${booking.treatment}). Kami menantikan kedatangan Kakak kembali.`;
     } else if (booking.status === 'cancelled') {
-      msg += `Mohon maaf Kak, jadwal booking Kakak untuk tanggal ${dateStr} jam ${booking.time} terpaksa kami *BATALKAN* 🙏\n\nSilakan balas pesan ini jika Kakak ingin melakukan *reschedule* (jadwal ulang) ke hari lain. Terima kasih atas pengertiannya!`;
+      msg += `Mohon maaf, jadwal booking Kakak untuk hari ${dateStr} pukul ${booking.time} terpaksa kami *BATALKAN*.\n\nSilakan membalas pesan ini apabila Kakak ingin melakukan penjadwalan ulang ke hari lain. Terima kasih atas pengertiannya.`;
     } else {
-      msg += `Kami telah menerima pesanan booking Kakak untuk:\n📅 ${dateStr} jam ${booking.time}\n💅 ${booking.treatment}\n\nSaat ini statusnya masih *Pending*. Kami akan segera mengabari Kakak lebih lanjut ya. Terima kasih! ✨`;
+      msg += `Kami telah menerima pesanan booking Kakak untuk:\nTanggal: ${dateStr}\nJam: ${booking.time}\nTreatment: ${booking.treatment}\n\nSaat ini status pesanan Kakak masih *Pending*. Kami akan segera mengabari Kakak lebih lanjut untuk konfirmasi ketersediaan jadwal. Terima kasih.`;
     }
 
     return encodeURIComponent(msg);

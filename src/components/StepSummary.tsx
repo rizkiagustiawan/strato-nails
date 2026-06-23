@@ -36,10 +36,10 @@ export function StepSummary({ formData, updateData, onNext, onPrev, isSubmitting
   const generateWhatsAppMessage = () => {
     const isId = language === 'id';
     const greeting = isId 
-      ? `Halo Kak! 👋\nSaya ingin konfirmasi jadwal booking di Strato Nails, dengan detail berikut:` 
-      : `Hi! 👋\nI would like to confirm my booking at Strato Nails with the following details:`;
+      ? `Halo Admin,\nSaya ingin melakukan konfirmasi jadwal booking di Strato Nails. Berikut adalah detail pesanan saya:` 
+      : `Hello,\nI would like to confirm my booking appointment at Strato Nails. Here are my details:`;
 
-    const msg = `${greeting}\n\n👤 *${isId ? 'Nama' : 'Name'}:* ${formData.name}\n📱 *${isId ? 'Kontak' : 'Contact'}:* ${formData.contact}\n📅 *${isId ? 'Tanggal' : 'Date'}:* ${formData.date ? new Date(formData.date).toLocaleDateString(isId ? 'id-ID' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '-'}\n⏰ *${isId ? 'Waktu' : 'Time'}:* ${formData.time}\n💅 *${isId ? 'Perawatan' : 'Treatment'}:* ${formData.treatment}\n💰 *Budget:* ${formData.budget}\n💳 *${isId ? 'Pembayaran' : 'Payment'}:* ${formData.paymentMethod}\n\n${isId ? 'Apakah jadwal ini masih tersedia? Terima kasih! ✨' : 'Is this time slot still available? Thank you! ✨'}`;
+    const msg = `${greeting}\n\n*${isId ? 'Nama' : 'Name'}:* ${formData.name}\n*${isId ? 'Kontak' : 'Contact'}:* ${formData.contact}\n*${isId ? 'Tanggal' : 'Date'}:* ${formData.date ? new Date(formData.date).toLocaleDateString(isId ? 'id-ID' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '-'}\n*${isId ? 'Waktu' : 'Time'}:* ${formData.time}\n*${isId ? 'Perawatan' : 'Treatment'}:* ${formData.treatment}\n*Budget:* ${formData.budget}\n*${isId ? 'Pembayaran' : 'Payment'}:* ${formData.paymentMethod}\n\n${isId ? 'Mohon informasikan apakah jadwal ini masih tersedia. Terima kasih banyak.' : 'Please let me know if this time slot is available. Thank you.'}`;
 
     return encodeURIComponent(msg);
   };
