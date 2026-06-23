@@ -478,3 +478,20 @@
     font-size: 0.8rem;
   }
 }
+
+/* Reference Photo Thumbnail */
+.reference-thumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s;
+}
+
+.reference-link:hover .reference-thumb {
+  transform: scale(1.5);
+  box-shadow: 0 4px 12px var(--card-shadow);
+  z-index: 10;
+  position: relative;
+}

@@ -14,6 +14,7 @@ const mockBookings: Booking[] = [
     treatment: 'Manicure Only',
     budget: '100k - 200k IDR',
     payment_method: 'Transfer',
+    photo_url: 'data:image/jpeg;base64,test',
     status: 'pending',
     notes: null,
     whatsapp_sent: false,

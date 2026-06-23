@@ -47,6 +47,7 @@ export function BookingTable({ bookings, loading, onStatusChange, onDelete }: Bo
             <th>Date</th>
             <th>Time</th>
             <th>Treatment</th>
+            <th>Reference</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
@@ -60,6 +61,15 @@ export function BookingTable({ bookings, loading, onStatusChange, onDelete }: Bo
               <td>{formatDate(booking.date)}</td>
               <td>{booking.time}</td>
               <td>{booking.treatment}</td>
+              <td>
+                {booking.photo_url ? (
+                  <a href={booking.photo_url} target="_blank" rel="noopener noreferrer" className="reference-link" title="View Reference Photo">
+                    <img src={booking.photo_url} alt="Ref" className="reference-thumb" />
+                  </a>
+                ) : (
+                  <span className="text-muted" style={{ fontSize: '0.8rem' }}>No photo</span>
+                )}
+              </td>
               <td>
                 <select
                   value={booking.status}

@@ -10,6 +10,7 @@ export interface Booking {
   treatment: string;
   budget: string | null;
   payment_method: string;
+  photo_url?: string | null;
   status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
   notes: string | null;
   whatsapp_sent: boolean;
