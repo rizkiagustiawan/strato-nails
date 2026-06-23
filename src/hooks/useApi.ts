@@ -43,12 +43,14 @@ export function useBookings(options: UseBookingsOptions = {}) {
         setBookings((prev) =>
           prev.map((b) => (b.booking_id === id ? { ...b, status: newStatus as Booking['status'] } : b))
         );
-        return true;
+        return { success: true };
       }
+      return { success: false, error: response.error };
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update booking');
+      const errMsg = err instanceof Error ? err.message : 'Failed to update booking';
+      setError(errMsg);
+      return { success: false, error: errMsg };
     }
-    return false;
   }, []);
 
   const deleteBooking = useCallback(async (id: string) => {
@@ -56,12 +58,18 @@ export function useBookings(options: UseBookingsOptions = {}) {
       const response = await api.deleteBooking(id);
       if (response.success) {
         setBookings((prev) => prev.filter((b) => b.booking_id !== id));
-        return true;
+        return { success: true };
       }
+      return { success: false, error: response.error };
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete booking');
+      if (err instanceof Error && err.message === 'Unauthorized') {
+        localStorage.removeItem('admin_token');
+        window.location.reload();
+      }
+      const errMsg = err instanceof Error ? err.message : 'Failed to delete booking';
+      setError(errMsg);
+      return { success: false, error: errMsg };
     }
-    return false;
   }, []);
 
   useEffect(() => {

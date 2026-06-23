@@ -17,23 +17,23 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
   const { bookings, loading: bookingsLoading, updateStatus, deleteBooking, fetchBookings } = useBookings({ status: statusFilter });
 
   const handleStatusChange = async (id: string, newStatus: string) => {
-    const success = await updateStatus(id, newStatus);
-    if (success) {
+    const result = await updateStatus(id, newStatus);
+    if (result.success) {
       toast.success(`Status updated to ${newStatus}`);
       fetchStats();
     } else {
-      toast.error('Failed to update status');
+      toast.error(`Failed to update status: ${result.error || 'Unknown error'}`);
     }
   };
 
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to delete this booking?')) {
-      const success = await deleteBooking(id);
-      if (success) {
+      const result = await deleteBooking(id);
+      if (result.success) {
         toast.success('Booking deleted successfully');
         fetchStats();
       } else {
-        toast.error('Failed to delete booking');
+        toast.error(`Failed to delete: ${result.error || 'Unknown error'}`);
       }
     }
   };

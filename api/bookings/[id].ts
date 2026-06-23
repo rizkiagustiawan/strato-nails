@@ -70,18 +70,29 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
 
       case 'DELETE': {
+        console.log(`[DELETE] Request for booking_id: ${id}`);
+        
+        if (!id) {
+          return res.status(400).json({
+            success: false,
+            error: 'Missing booking ID in URL',
+          });
+        }
+
         const [booking] = await sql(
           'DELETE FROM bookings WHERE booking_id = $1 RETURNING *',
           [id]
         );
 
         if (!booking) {
+          console.log(`[DELETE] Booking ${id} not found in DB`);
           return res.status(404).json({
             success: false,
-            error: 'Booking not found',
+            error: `Booking ${id} not found`,
           });
         }
 
+        console.log(`[DELETE] Booking ${id} deleted successfully`);
         return res.status(200).json({
           success: true,
           message: 'Booking deleted successfully',
