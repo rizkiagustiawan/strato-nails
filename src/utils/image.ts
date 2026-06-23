@@ -8,9 +8,9 @@ export function fileToBase64(file: File): Promise<string> {
 }
 
 export function compressImage(base64: string, maxWidth = 800, quality = 0.8): Promise<string> {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const img = new Image();
-    img.src = base64;
+    img.onerror = () => reject(new Error('Failed to load image for compression'));
     img.onload = () => {
       const canvas = document.createElement('canvas');
       let width = img.width;
@@ -25,10 +25,17 @@ export function compressImage(base64: string, maxWidth = 800, quality = 0.8): Pr
       canvas.height = height;
 
       const ctx = canvas.getContext('2d');
-      ctx?.drawImage(img, 0, 0, width, height);
+      if (ctx) {
+        // Fill white background to prevent transparent PNGs from turning black
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, width, height);
+        ctx.drawImage(img, 0, 0, width, height);
+      }
 
-      resolve(canvas.toDataURL('image/webp', quality));
+      // Always use JPEG for maximum compatibility and small payload size
+      resolve(canvas.toDataURL('image/jpeg', quality));
     };
+    img.src = base64;
   });
 }
 
