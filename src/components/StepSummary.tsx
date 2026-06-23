@@ -34,30 +34,24 @@ export function StepSummary({ formData, updateData, onNext, onPrev, isSubmitting
   const selectedPayment = useWatch({ control, name: 'paymentMethod' });
 
   const generateWhatsAppMessage = () => {
-    const msg =
-      language === 'id'
-        ? `🌸 *Booking Baru dari Strato Nails* 🌸
+    const isId = language === 'id';
+    const greeting = isId 
+      ? `Halo Kak! 👋\nSaya ingin konfirmasi jadwal booking di Strato Nails, dengan detail berikut:` 
+      : `Hi! 👋\nI would like to confirm my booking at Strato Nails with the following details:`;
 
-👤 *Nama:* ${formData.name}
-📱 *Kontak:* ${formData.contact}
-📅 *Tanggal:* ${formData.date}
-⏰ *Waktu:* ${formData.time}
-💅 *Perawatan:* ${formData.treatment}
+    const msg = `${greeting}
+    
+👤 *${isId ? 'Nama' : 'Name'}:* ${formData.name}
+📱 *${isId ? 'Kontak' : 'Contact'}:* ${formData.contact}
+📅 *${isId ? 'Tanggal' : 'Date'}:* ${formData.date ? new Date(formData.date).toLocaleDateString(isId ? 'id-ID' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '-'}
+⏰ *${isId ? 'Waktu' : 'Time'}:* ${formData.time}
+💅 *${isId ? 'Perawatan' : 'Treatment'}:* ${formData.treatment}
 💰 *Budget:* ${formData.budget}
-💳 *Pembayaran:* ${formData.paymentMethod}
+💳 *${isId ? 'Pembayaran' : 'Payment'}:* ${formData.paymentMethod}
 
-Ditunggu ya! ✨`
-        : `🌸 *New Booking from Strato Nails* 🌸
-
-👤 *Name:* ${formData.name}
-📱 *Contact:* ${formData.contact}
-📅 *Date:* ${formData.date}
-⏰ *Time:* ${formData.time}
-💅 *Treatment:* ${formData.treatment}
-💰 *Budget:* ${formData.budget}
-💳 *Payment:* ${formData.paymentMethod}
-
-Looking forward to seeing you! ✨`;
+${isId 
+  ? 'Apakah jadwal ini masih tersedia? Terima kasih! ✨' 
+  : 'Is this time slot still available? Thank you! ✨'}`;
 
     return encodeURIComponent(msg);
   };
