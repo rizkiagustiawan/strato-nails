@@ -168,8 +168,10 @@ export function StepStyle({ formData, updateData, onNext, onPrev }: StepProps) {
                   Processing image...
                 </span>
               ) : (
-                <span id="photo-hint" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                  <Camera size={20} /> {t('photoHint')}
+                <span id="photo-hint" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                  <Camera size={28} style={{ color: 'var(--primary-hover)', marginBottom: '4px' }} /> 
+                  <span style={{ fontWeight: 600, color: 'var(--text-main)', fontSize: '1rem' }}>{t('photoHint')}</span>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{t('photoHintSub')}</span>
                 </span>
               )}
             </label>
