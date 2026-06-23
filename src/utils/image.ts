@@ -27,7 +27,7 @@ export function compressImage(base64: string, maxWidth = 800, quality = 0.8): Pr
       const ctx = canvas.getContext('2d');
       ctx?.drawImage(img, 0, 0, width, height);
 
-      resolve(canvas.toDataURL('image/jpeg', quality));
+      resolve(canvas.toDataURL('image/webp', quality));
     };
   });
 }

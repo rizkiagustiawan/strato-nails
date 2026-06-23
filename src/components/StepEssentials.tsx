@@ -15,7 +15,7 @@ export function StepEssentials({ formData, updateData, onNext }: StepProps) {
       (val) => {
         if (!val) return false;
         const hour = parseInt(val.split(':')[0], 10);
-        return hour >= 9 && hour < 20;
+        return hour >= 9 && hour <= 20;
       },
       { message: t('validationTimeRange') }
     ),
