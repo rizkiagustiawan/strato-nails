@@ -39,19 +39,7 @@ export function StepSummary({ formData, updateData, onNext, onPrev, isSubmitting
       ? `Halo Kak! 👋\nSaya ingin konfirmasi jadwal booking di Strato Nails, dengan detail berikut:` 
       : `Hi! 👋\nI would like to confirm my booking at Strato Nails with the following details:`;
 
-    const msg = `${greeting}
-    
-👤 *${isId ? 'Nama' : 'Name'}:* ${formData.name}
-📱 *${isId ? 'Kontak' : 'Contact'}:* ${formData.contact}
-📅 *${isId ? 'Tanggal' : 'Date'}:* ${formData.date ? new Date(formData.date).toLocaleDateString(isId ? 'id-ID' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '-'}
-⏰ *${isId ? 'Waktu' : 'Time'}:* ${formData.time}
-💅 *${isId ? 'Perawatan' : 'Treatment'}:* ${formData.treatment}
-💰 *Budget:* ${formData.budget}
-💳 *${isId ? 'Pembayaran' : 'Payment'}:* ${formData.paymentMethod}
-
-${isId 
-  ? 'Apakah jadwal ini masih tersedia? Terima kasih! ✨' 
-  : 'Is this time slot still available? Thank you! ✨'}`;
+    const msg = `${greeting}\n\n👤 *${isId ? 'Nama' : 'Name'}:* ${formData.name}\n📱 *${isId ? 'Kontak' : 'Contact'}:* ${formData.contact}\n📅 *${isId ? 'Tanggal' : 'Date'}:* ${formData.date ? new Date(formData.date).toLocaleDateString(isId ? 'id-ID' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '-'}\n⏰ *${isId ? 'Waktu' : 'Time'}:* ${formData.time}\n💅 *${isId ? 'Perawatan' : 'Treatment'}:* ${formData.treatment}\n💰 *Budget:* ${formData.budget}\n💳 *${isId ? 'Pembayaran' : 'Payment'}:* ${formData.paymentMethod}\n\n${isId ? 'Apakah jadwal ini masih tersedia? Terima kasih! ✨' : 'Is this time slot still available? Thank you! ✨'}`;
 
     return encodeURIComponent(msg);
   };

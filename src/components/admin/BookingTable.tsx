@@ -39,11 +39,11 @@ export function BookingTable({ bookings, loading, onStatusChange, onDelete }: Bo
     let msg = `Halo Kak ${booking.name}! 👋\nIni dari *Strato Nails*.\n\n`;
 
     if (booking.status === 'confirmed') {
-      msg += `Kabar gembira! Jadwal booking Kakak sudah kami **KONFIRMASI** 🎉\n\n📌 *Detail Jadwal:*\n- Tanggal: ${dateStr}\n- Jam: ${booking.time}\n- Treatment: ${booking.treatment}\n\nMohon hadir tepat waktu ya Kak. Jika ada kendala atau ingin mengubah jadwal, silakan balas pesan ini.\n\nSampai jumpa! ✨`;
+      msg += `Kabar gembira! Jadwal booking Kakak sudah kami *KONFIRMASI* 🎉\n\n📌 *Detail Jadwal:*\n- Tanggal: ${dateStr}\n- Jam: ${booking.time}\n- Treatment: ${booking.treatment}\n\nMohon hadir tepat waktu ya Kak. Jika ada kendala atau ingin mengubah jadwal, silakan balas pesan ini.\n\nSampai jumpa! ✨`;
     } else if (booking.status === 'completed') {
       msg += `Terima kasih banyak sudah mempercayakan cantiknya kuku Kakak di Strato Nails! 💖\n\nSemoga Kakak suka dengan hasilnya (${booking.treatment}). Jangan lupa tag kami di Instagram ya Kak! Ditunggu kedatangannya kembali. 🥰`;
     } else if (booking.status === 'cancelled') {
-      msg += `Mohon maaf Kak, jadwal booking Kakak untuk tanggal ${dateStr} jam ${booking.time} terpaksa kami **BATALKAN** 🙏\n\nSilakan balas pesan ini jika Kakak ingin melakukan *reschedule* (jadwal ulang) ke hari lain. Terima kasih atas pengertiannya!`;
+      msg += `Mohon maaf Kak, jadwal booking Kakak untuk tanggal ${dateStr} jam ${booking.time} terpaksa kami *BATALKAN* 🙏\n\nSilakan balas pesan ini jika Kakak ingin melakukan *reschedule* (jadwal ulang) ke hari lain. Terima kasih atas pengertiannya!`;
     } else {
       msg += `Kami telah menerima pesanan booking Kakak untuk:\n📅 ${dateStr} jam ${booking.time}\n💅 ${booking.treatment}\n\nSaat ini statusnya masih *Pending*. Kami akan segera mengabari Kakak lebih lanjut ya. Terima kasih! ✨`;
     }
