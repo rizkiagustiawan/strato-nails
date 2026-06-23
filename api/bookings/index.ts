@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { neon } from '@neondatabase/serverless';
-import { verifyAuth } from '../lib/auth';
+import { verifyAuth } from '../lib/auth.js';
 
 const sql = neon(process.env.DATABASE_URL!);
 
@@ -26,7 +26,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const { status, limit = '50', offset = '0' } = req.query;
         
         let query = 'SELECT * FROM bookings';
-        const params: string[] = [];
+        const params: unknown[] = [];
         
         if (status && status !== 'all') {
           query += ' WHERE status = $1';

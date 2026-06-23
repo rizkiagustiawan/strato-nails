@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { neon } from '@neondatabase/serverless';
-import { verifyAuth } from '../lib/auth';
+import { verifyAuth } from '../lib/auth.js';
 
 const sql = neon(process.env.DATABASE_URL!);
 
