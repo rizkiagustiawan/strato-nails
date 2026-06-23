@@ -4,6 +4,7 @@ import { StatsCards } from './StatsCards';
 import { BookingTable } from './BookingTable';
 import { LayoutDashboard, CalendarDays, RefreshCw, Flame, ClipboardList, Sparkles, LogOut } from 'lucide-react';
 import type { Booking } from '../../services/api';
+import { toast } from 'sonner';
 
 interface AdminDashboardProps {
   onLogout: () => void;
@@ -18,7 +19,10 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
   const handleStatusChange = async (id: string, newStatus: string) => {
     const success = await updateStatus(id, newStatus);
     if (success) {
+      toast.success(`Status updated to ${newStatus}`);
       fetchStats();
+    } else {
+      toast.error('Failed to update status');
     }
   };
 
@@ -26,7 +30,10 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
     if (window.confirm('Are you sure you want to delete this booking?')) {
       const success = await deleteBooking(id);
       if (success) {
+        toast.success('Booking deleted successfully');
         fetchStats();
+      } else {
+        toast.error('Failed to delete booking');
       }
     }
   };
