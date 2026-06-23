@@ -39,8 +39,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const mimeType = matches[1];
     const base64Data = matches[2];
 
-    // Menggunakan model gemini-1.5-flash untuk kecepatan dan analisa gambar
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    // Menggunakan model gemini-1.5-flash-latest untuk kecepatan dan analisa gambar
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
 
     const prompt = `You are a professional nail artist assistant. 
     Analyze the provided image of nail art and classify it into EXACTLY ONE of the following 5 categories:
